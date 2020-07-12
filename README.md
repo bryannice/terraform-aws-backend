@@ -1,61 +1,48 @@
-# template-repository
+# terraform-aws-backend
 
-This repository is a template repository.
+![Terraform](assets/terraform-icon.png)
 
-## Files
+This repo is the a pattern to create the necessary components an AWS backend. The makefile holds the automation logic to create the infrastructure.
 
-Template files:
+## Terraform Environment
 
-1. .github/
-    1. ISSUE\_TEMPLATE/
-        1. [bug\_report.md](#githubissue_templatebug_reportmd)
-        1. [feature\_request.md](#githubissue_templatefeature_requestmd)
-1. [LICENSE](#license)
-1. [PULL\_REQUEST\_TEMPLATE.md](#pull_request_templatemd)
-1. [README.md](#readmemd)
+Execute the command below to build the docker image that will be used for the Terraform environment.
 
-## PULL\_REQUEST\_TEMPLATE.md
+```makefile
+make docker-build
+```
 
-The `PULL_REQUEST_TEMPLATE.md` file asks a pull requester for information about the pull request.
+Execute the command below to spawn a container and ssh into it to be in the Terraform environment.
 
-The [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md) file in this repository
-is an example that can be modified.
+```makefile
+make cli \ 
+    AWS_ACCESS_KEY_ID=<This is the AWS access key.> \
+    AWS_SECRET_ACCESS_KEY=<This is the AWS secret key.> \
+    AWS_DEFAULT_REGION=<This is the AWS region.>
+```
 
-### How to create PULL\_REQUEST\_TEMPLATE.md
+## Make Targets to Create or Destroy Backend
 
-1. Option #1: Using GitHub's "Wizard"
-    1. [github.com](https://github.com/) > (choose repository) > Insights > Community > Pull request template > "Add" button
-1. Option #2: Manual file creation
-    1. See GitHub's [Creating a pull request template for your repository](https://help.github.com/articles/creating-a-pull-request-template-for-your-repository/)
+Below are the main make targets for creating and destroying infrastructure. There are other make targets and to see them, open the makefile. Before executing make targets within the Terraform container, these environment variables must be set.
 
-## .github/ISSUE\_TEMPLATE/bug\_report.md
+| Environment Variable | Description |
+| -------------------- | ----------- |
+| AWS_ACCESS_KEY_ID | This is the AWS access key. |
+| AWS_SECRET_ACCESS_KEY | This is the AWS secret key. |
+| AWS_DEFAULT_REGION | This is the AWS region. |
 
-A template presented to the Contributor when creating an issue that reports a bug.
+To crate backend execute the following:
 
-The [bug_report.md](.github/ISSUE_TEMPLATE/bug_report.md) file in this repository
-is an example that can be modified.
+```makefile
+make backend
+```
 
-### How to create .github/ISSUE\_TEMPLATE/bug\_report.md
+To destroy backend execute the following:
 
-1. Option #1: Using GitHub's "Wizard"
-    1. [github.com](https://github.com/) > (choose repository) > Insights > Community > Issue templates > "Add" button > Add template: Bug report
-
-## .github/ISSUE\_TEMPLATE/feature\_request.md
-
-A template presented to the Contributor when creating an issue that requests a feature.
-
-The [feature_request.md](.github/ISSUE_TEMPLATE/feature_request.md) file in this repository
-is an example that can be modified.
-
-### How to create .github/ISSUE\_TEMPLATE/feature\_request.md
-
-1. Option #1: Using GitHub's "Wizard"
-    1. [github.com](https://github.com/) > (choose repository) > Insights > Community > Issue templates > "Add" button > Add template: Feature request
+```makefile
+make destroy
+```
 
 ## License
 
-[GPLv3](LICENSE)
-
-## References
-
-* [Markdownlint](https://dlaa.me/markdownlint/)
+[Apache 2](LICENSE)
