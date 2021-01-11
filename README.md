@@ -6,41 +6,32 @@ This repo is the a pattern to create the necessary components an AWS backend. Th
 
 ## Terraform Environment
 
-Execute the command below to build the docker image that will be used for the Terraform environment.
+Execute the command below create an environment to interact with the Terraform cli.
 
 ```makefile
-make docker-build
-```
-
-Execute the command below to spawn a container and ssh into it to be in the Terraform environment.
-
-```makefile
-make cli \ 
-    AWS_ACCESS_KEY_ID=<This is the AWS access key.> \
-    AWS_SECRET_ACCESS_KEY=<This is the AWS secret key.> \
-    AWS_DEFAULT_REGION=<This is the AWS region.>
+make cli
 ```
 
 ## Make Targets to Create or Destroy Backend
 
 Below are the main make targets for creating and destroying infrastructure. There are other make targets and to see them, open the makefile. Before executing make targets within the Terraform container, these environment variables must be set.
 
-| Environment Variable | Description |
-| -------------------- | ----------- |
-| AWS_ACCESS_KEY_ID | This is the AWS access key. |
-| AWS_SECRET_ACCESS_KEY | This is the AWS secret key. |
-| AWS_DEFAULT_REGION | This is the AWS region. |
+| Environment Variable  | Description                         |
+| --------------------- | ----------------------------------- |
+| AWS_ACCESS_KEY_ID     | This is the AWS access key.         |
+| AWS_DEFAULT_OUTPUT    | Specifies the output format to use. |
+| AWS_DEFAULT_REGION    | This is the AWS region.             |
+| AWS_SECRET_ACCESS_KEY | This is the AWS secret key.         |
 
 To crate backend execute the following:
 
 ```makefile
-make backend
-```
-
-To destroy backend execute the following:
-
-```makefile
-make destroy
+make \
+    AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> \
+    AWS_DEFAULT_OUTPUT=<AWS_DEFAULT_OUTPUT> \
+    AWS_DEFAULT_REGION=<AWS_DEFAULT_REGION> \
+    AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> \
+    build
 ```
 
 ## License
