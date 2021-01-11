@@ -74,3 +74,5 @@ template.beconf.tfvars
 *.tfstate
 *.tfstate.backup
 backend.tf
+.terraform.lock.hcl
+.bash_history
