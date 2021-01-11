@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.14"
 }
 
 provider "aws" {
@@ -9,7 +9,7 @@ provider "aws" {
 }
 
 module "backend_s3_bucket" {
-  source        = "github.com/bryan-nice/terraform-aws-modules//s3_bucket?ref=1.0.0"
+  source        = "github.com/bryannice/terraform-aws-module-s3-bucket//?ref=1.1.0"
   bucket        = var.bucket
   enabled       = true
   sse_algorithm = "AES256"
@@ -17,7 +17,7 @@ module "backend_s3_bucket" {
 }
 
 module "backend_dynamodb" {
-  source         = "github.com/bryan-nice/terraform-aws-modules//dynamodb_table?ref=1.0.0"
+  source         = "github.com/bryannice/terraform-aws-module-dynamodb-table//?ref=1.0.0"
   name           = module.backend_s3_bucket.id
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "LockID"
