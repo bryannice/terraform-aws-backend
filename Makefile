@@ -28,22 +28,22 @@ ifeq ($(findstring $(MAKECMDGOALS),$(TARGETS_TO_CHECK)),$(MAKECMDGOALS))
 $(info $(BOLD)$(YELLOW)Checking required AWS credential context is set.$(RESET))
 ifeq ($(AWS_CREDENTIAL_CONTEXT),0)
 ifeq ($(AWS_ACCESS_KEY_ID), )
-$(info $(BOLD)$(RED)Required Envirornment AWS_ACCESS_KEY_ID is not set.$(RESET))
+$(info $(BOLD)$(RED)Required Environment AWS_ACCESS_KEY_ID is not set.$(RESET))
 AWS_ACCESS_KEY_ID := $(shell read -p "AWS_ACCESS_KEY_ID=" I; echo $$I)
 $(info $(BOLD)$(GREEN)AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID)$(RESET))
 endif
 ifeq ($(AWS_SECRET_ACCESS_KEY), )
-$(info $(BOLD)$(RED)Required Envirornment AWS_SECRET_ACCESS_KEY is not set.$(RESET))
+$(info $(BOLD)$(RED)Required Environment AWS_SECRET_ACCESS_KEY is not set.$(RESET))
 AWS_SECRET_ACCESS_KEY := $(shell read -p "AWS_SECRET_ACCESS_KEY=" I; echo $$I)
 $(info $(BOLD)$(GREEN)AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)$(RESET))
 endif
 ifeq ($(AWS_DEFAULT_REGION), )
-$(info $(BOLD)$(RED)Required Envirornment AWS_DEFAULT_REGION is not set.$(RESET))
+$(info $(BOLD)$(RED)Required Environment AWS_DEFAULT_REGION is not set.$(RESET))
 AWS_DEFAULT_REGION := $(shell read -p "AWS_DEFAULT_REGION=" I; echo $$I)
 $(info $(BOLD)$(GREEN)AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION)$(RESET))
 endif
 ifeq ($(AWS_DEFAULT_OUTPUT), )
-$(info $(BOLD)$(RED)Required Envirornment AWS_DEFAULT_OUTPUT is not set.$(RESET))
+$(info $(BOLD)$(RED)Required Environment AWS_DEFAULT_OUTPUT is not set.$(RESET))
 AWS_DEFAULT_OUTPUT := $(shell read -p "AWS_DEFAULT_OUTPUT=" I; echo $$I)
 $(info $(BOLD)$(GREEN)AWS_DEFAULT_OUTPUT=$(AWS_DEFAULT_OUTPUT)$(RESET))
 endif
@@ -80,7 +80,7 @@ DOCKER_IMAGE_NAME ?= bryannice/alpine-terraform-aws
 DOCKER_IMAGE_TAG ?= 1.3.2
 
 # -----------------------------------------------------------------------------
-# Terraform Varibles
+# Terraform Variables
 # -----------------------------------------------------------------------------
 S3_BUCKET_NAME ?= $(GIT_ACCOUNT_NAME)-$(GIT_REPOSITORY_NAME)
 

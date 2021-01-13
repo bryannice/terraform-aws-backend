@@ -22,7 +22,7 @@ Below are the main make targets for creating and destroying infrastructure. Ther
 | AWS_DEFAULT_OUTPUT    | Y        | Specifies the output format to use.                                                  |
 | AWS_DEFAULT_REGION    | Y        | This is the AWS region.                                                              |
 | AWS_SECRET_ACCESS_KEY | Y        | This is the AWS secret key.                                                          |
-| S3_BUCKET_NAME        | N        | Name of the bucket to create (defualts to <GIT_ACCOUNT_NAME>-<GIT_REPOSITORY_NAME>). |
+| S3_BUCKET_NAME        | N        | Name of the bucket to create (defaults to <GIT_ACCOUNT_NAME>-<GIT_REPOSITORY_NAME>). |
 
 To crate backend using a container to execute the following:
 
