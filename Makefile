@@ -107,7 +107,8 @@ clean:
 	@rm -rf backend.tf
 	@rm -rf *.tfstate.backup
 	@rm -rf .aws
-	@rm -rf *.terraform.lock.hcl
+	@rm -rf .terraform.lock.hcl
+	@rm -rf .bash_history
 	@echo "$(BOLD)$(GREEN)Completed cleaning up working directory.$(RESET)"
 
 .PHONY: cli
