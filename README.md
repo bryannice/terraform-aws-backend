@@ -2,7 +2,9 @@
 
 ![Terraform](assets/terraform-icon.png)
 
-This repo is the a pattern to create the necessary components an AWS backend. The makefile holds the automation logic to create the infrastructure.
+This repo is a pattern to create the necessary components an AWS backend. 
+
+The makefile holds the automation logic to create the infrastructure.
 
 ## Terraform Environment
 
@@ -24,7 +26,7 @@ Below are the main make targets for creating and destroying infrastructure. Ther
 | AWS_SECRET_ACCESS_KEY | Y        | This is the AWS secret key.                                                          |
 | S3_BUCKET_NAME        | N        | Name of the bucket to create (defaults to <GIT_ACCOUNT_NAME>-<GIT_REPOSITORY_NAME>). |
 
-To crate backend using a container to execute the following:
+To create backend using a container to execute the following:
 
 ```makefile
 make \
