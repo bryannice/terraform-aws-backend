@@ -75,4 +75,4 @@ make \
 
 ## License
 
-[Apache 2](LICENSE)
+[GPLv3](LICENSE)
