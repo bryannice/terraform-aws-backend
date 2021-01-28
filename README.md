@@ -59,8 +59,28 @@ make \
     S3_BUCKET_NAME=<S3_BUCKET_NAME> \
     deprovision
 ```
+## main.tf Provides Links to Pinned Semantic Versions
+This pattern is designed to be re-usable and extensible. For your convenience as well as reliability and stability, we have pinned this repository to a specific version of Terraform as well as two other repositories we have published.
+```makefile
+terraform {
+  required_version = ">= 0.14"
+}
+```
+
+Feel free to use our provided repositories or modify as you desire. All of these linkages are specified in main.tf. Please note the Semantic Version pinning for this repository version via "?ref=1.1.0".
+
+```makefile
+module "backend_s3_bucket" {
+  bucket        = var.bucket
+  enabled       = true
+  force_destroy = true
+  source        = "github.com/bryannice/terraform-aws-module-s3-bucket//?ref=1.1.0"
+  sse_algorithm = "AES256"
+}
+```
 
 ## References
+### Terraform and Amazon Web Services
 
 * [How to Manage Terraform State](https://blog.gruntwork.io/how-to-manage-terraform-state-28f5697e68fa)
 * [State Management with Terraform](https://medium.com/@mitesh_shamra/state-management-with-terraform-9f13497e54cf)
@@ -70,6 +90,9 @@ make \
 * [Terraform Tips & Tricks: Loops, If Statements, and Gotchas](https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
 * [AWS Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)
 * [Terraform CLI](https://www.terraform.io/docs/cli-index.html)
+  
+### Semantic Versioning
+* [Semantic Versioning 2.0.0](https://semver.org/)
 * [Introduction to Semantic Versioning](https://www.geeksforgeeks.org/introduction-semantic-versioning/)
 
 
