@@ -2,11 +2,11 @@
 
 ![Terraform](assets/terraform-icon.png)
 
-This repo is a pattern to create the necessary components for instantiating an AWS backend. 
+This repo is a pattern to create the necessary components for instantiating an AWS backend.
 
 The makefile holds the automation logic to create the infrastructure.
 
-For your convenience, we provide a Docker-based Terraform instance, and associated Terraform modules, for provisioning your AWS Backend instance. All components of this repo utilize semantic versioning to provide transparency, auditability, as well as improve reproducibility. 
+For your convenience, we provide a Docker-based Terraform instance, and associated Terraform modules, for provisioning your AWS Backend instance. All components of this repo utilize semantic versioning to provide transparency, auditability, as well as improve reproducibility.
 
 Your AWS Backend will enable you to maintain state files associated with your application deployment; leveraging a combination of both Amazon S3 storage and Amazon DynamoDB.
 
@@ -20,9 +20,9 @@ make cli
 
 ## Make Targets to Provision (aka "create") or Deprovision (aka "destroy") Your AWS Backend
 
-Below are the main make targets for provisioning and deprovisioning infrastructure. 
+Below are the main make targets for provisioning and deprovisioning infrastructure.
 
-There are other make targets and to see them, open the makefile. 
+There are other make targets and to see them, open the makefile.
 
 Before executing make targets within the Terraform container, these environment variables must be set.
 
@@ -59,8 +59,11 @@ make \
     S3_BUCKET_NAME=<S3_BUCKET_NAME> \
     deprovision
 ```
+
 ## main.tf Provides Links to Pinned Semantic Versions
+
 This pattern is designed to be re-usable and extensible. For your convenience as well as reliability and stability, we have pinned this repository to a specific version of Terraform as well as two other repositories we have published.
+
 ```makefile
 terraform {
   required_version = ">= 0.14"
@@ -80,6 +83,7 @@ module "backend_s3_bucket" {
 ```
 
 ## References
+
 ### Terraform and Amazon Web Services
 
 * [How to Manage Terraform State](https://blog.gruntwork.io/how-to-manage-terraform-state-28f5697e68fa)
@@ -90,11 +94,11 @@ module "backend_s3_bucket" {
 * [Terraform Tips & Tricks: Loops, If Statements, and Gotchas](https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
 * [AWS Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)
 * [Terraform CLI](https://www.terraform.io/docs/cli-index.html)
-  
+
 ### Semantic Versioning
+
 * [Semantic Versioning 2.0.0](https://semver.org/)
 * [Introduction to Semantic Versioning](https://www.geeksforgeeks.org/introduction-semantic-versioning/)
-
 
 ## License
 
