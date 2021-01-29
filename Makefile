@@ -6,10 +6,10 @@
 # Internal Variables
 # -----------------------------------------------------------------------------
 BOLD :=$(shell tput bold)
-RED :=$(shell tput setaf 1)
 GREEN :=$(shell tput setaf 2)
-YELLOW :=$(shell tput setaf 3)
+RED :=$(shell tput setaf 1)
 RESET :=$(shell tput sgr0)
+YELLOW :=$(shell tput setaf 3)
 
 # -----------------------------------------------------------------------------
 # FUNCTIONS
@@ -63,9 +63,9 @@ endif
 # Git Variables
 # -----------------------------------------------------------------------------
 
+GIT_ACCOUNT_NAME := $(shell git config --get remote.origin.url | rev | cut -d"." -f2 | cut -d"/" -f2 | cut -d":" -f1 | rev)
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 GIT_REPOSITORY_NAME := $(shell git config --get remote.origin.url | rev | cut -d"." -f2 | cut -d"/" -f1 | rev )
-GIT_ACCOUNT_NAME := $(shell git config --get remote.origin.url | rev | cut -d"." -f2 | cut -d"/" -f2 | cut -d":" -f1 | rev)
 GIT_SHA := $(shell git log --pretty=format:'%H' -n 1)
 GIT_TAG ?= $(shell git describe --always --tags | awk -F "-" '{print $$1}')
 GIT_TAG_END ?= HEAD
@@ -87,10 +87,10 @@ S3_BUCKET_NAME ?= $(GIT_ACCOUNT_NAME)-$(GIT_REPOSITORY_NAME)
 
 .EXPORT_ALL_VARIABLES:
 TF_VAR_access_key ?= $(AWS_ACCESS_KEY_ID)
-TF_VAR_secret_key ?= $(AWS_SECRET_ACCESS_KEY)
 TF_VAR_bucket ?= $(S3_BUCKET_NAME)
-TF_VAR_region ?= $(AWS_DEFAULT_REGION)
 TF_VAR_key := backend/$(GIT_REPOSITORY_NAME).tfstate #Terraform Statefile Name
+TF_VAR_region ?= $(AWS_DEFAULT_REGION)
+TF_VAR_secret_key ?= $(AWS_SECRET_ACCESS_KEY)
 
 # -----------------------------------------------------------------------------
 # Terraform Targets
@@ -98,17 +98,17 @@ TF_VAR_key := backend/$(GIT_REPOSITORY_NAME).tfstate #Terraform Statefile Name
 .PHONY: clean
 clean:
 	@echo "$(BOLD)$(YELLOW)Cleaning up working directory.$(RESET)"
+	@rm -rf backend.tf
 	@rm -rf beconf.tfvarse
 	@rm -rf beconf.tfvars
+	@rm -rf crash.log
+	@rm -rf .aws
+	@rm -rf .bash_history
 	@rm -rf .terraform
 	@rm -rf .terraform.d
-	@rm -rf *.tfstate
-	@rm -rf crash.log
-	@rm -rf backend.tf
-	@rm -rf *.tfstate.backup
-	@rm -rf .aws
 	@rm -rf .terraform.lock.hcl
-	@rm -rf .bash_history
+	@rm -rf *.tfstate
+	@rm -rf *.tfstate.backup
 	@echo "$(BOLD)$(GREEN)Completed cleaning up working directory.$(RESET)"
 
 .PHONY: cli
@@ -135,10 +135,10 @@ change-to-local:
 	@echo "$(BOLD)$(YELLOW)Creating backend.tf with local configuration.$(RESET)"
 	@export BACKEND_TYPE=local; \
 	export BUCKET=""; \
-	export KEY=""; \
-	export REGION=""; \
 	export DYNAMODB_TABLE=""; \
 	export ENCRYPT=""; \
+	export KEY=""; \
+	export REGION=""; \
 	envsubst < templates/template.backend.tf > backend.tf
 	@echo "$(BOLD)$(GREEN)Completed generating backend.tf.$(RESET)"
 
@@ -147,10 +147,10 @@ change-to-s3:
 	@echo "$(BOLD)$(YELLOW)Creating backend.tf with s3 configuration.$(RESET)"
 	@export BACKEND_TYPE=s3; \
 	export BUCKET="bucket = \"$(TF_VAR_bucket)\""; \
-	export KEY="key = \"$(TF_VAR_key)\""; \
-	export REGION="region = \"$(TF_VAR_region)\""; \
 	export DYNAMODB_TABLE="dynamodb_table = \"$(TF_VAR_bucket)\""; \
 	export ENCRYPT="encrypt = \"true\""; \
+	export KEY="key = \"$(TF_VAR_key)\""; \
+	export REGION="region = \"$(TF_VAR_region)\""; \
 	envsubst < templates/template.backend.tf > backend.tf
 	@echo "$(BOLD)$(GREEN)Completed generating backend.tf.$(RESET)"
 
